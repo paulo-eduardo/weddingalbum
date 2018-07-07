@@ -1,0 +1,4 @@
+virtual
+/app/BACKEND/weddingpictures/pictures/__pycache__/
+/app/FRONTEND/albumvue/dist/
+/app/BACKEND/weddingpictures/weedingpictures/__pycache__
