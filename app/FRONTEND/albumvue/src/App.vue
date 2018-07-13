@@ -30,4 +30,11 @@ a.logo {
   font-family: 'Courier New', Courier, monospace
 }
 
+img.picture {
+    height: auto;
+    max-height: 100%;
+    width: auto;
+    max-width: 100%;
+}
+
 </style>

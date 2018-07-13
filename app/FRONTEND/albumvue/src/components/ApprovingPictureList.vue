@@ -21,7 +21,7 @@ export default {
     },
     data () {
         return {
-            pictures: null
+            pictures: []
         }
     },
     mounted() {

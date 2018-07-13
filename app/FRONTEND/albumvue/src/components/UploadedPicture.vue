@@ -29,13 +29,18 @@ export default {
     reader.readAsDataURL(this.picture);
     var data = new FormData();
     data.append('img', this.picture)
-    const init = {
+    const init = { 
         method: 'POST',
         body: data
     };
     fetch(localStorage.link +"/pictures/", init)
-    .then(() => { this.status = 'Uploaded' })
-    .catch(() => { this.status = 'Erro' })
+    .then((response) => {
+        if(response.status == 201){
+            this.status = "Uploaded";
+        } else {
+            this.status = "Error"
+        }
+    })
   },
   methods: {
       createImage(file) {

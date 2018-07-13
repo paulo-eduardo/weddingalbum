@@ -7,6 +7,7 @@ from rest_framework.decorators import parser_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from pictures.serializers import PicturesSerializer
 from pictures.models import Pictures
+import tinify
 import boto3
 import json
 
@@ -19,14 +20,23 @@ class PicturesList(APIView):
             'name' : picture.name
         })
 
+        tinify.key = 'u1QV4IRunMT64XkAZdBg99xSqflppWjd'
+
+        source = tinify.from_file(picture)
+        resized = source.resize(
+            method="cover",
+            width=400,
+            height=280
+        ).to_buffer()
+
         if serializer.is_valid():
 
             serializer.save()
             s3 = boto3.resource('s3')
-            s3.Bucket('albumcasamento').put_object(Key=str(serializer.data['id']) + picture.name, Body=picture)
-            return Response(status=status.HTTP_201_CREATED)
+            s3.Bucket('albumcasamento').put_object(Key=str(serializer.data['id']) + picture.name, Body=resized)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, format=None):
         pictures = Pictures.objects.all()

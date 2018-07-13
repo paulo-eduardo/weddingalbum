@@ -42,12 +42,6 @@ export default {
 </script>
 
 <style>
-img.picture {
-    height: auto;
-    max-height: 280px;
-    width: auto;
-    max-width: 400px;
-}
 
 .cardSize {
     height: 300px;

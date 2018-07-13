@@ -41,7 +41,7 @@ export default {
                 this.$router.push('/Approving')
             })
             .catch((error)=>{
-                console.log(error);
+                this.error = "Login ou senha incorretos";
             })
         },
     }
@@ -53,5 +53,9 @@ export default {
   width: 400px;
   margin: auto;
   margin-top: 100px;
+}
+
+.helper-text {
+    color: red;
 }
 </style>
